@@ -14,12 +14,23 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  var hourIds = ["#hour-9", "#hour-10", "#hour-11", "#hour-12", "#hour-1", "#hour-2", "#hour-3", "#hour-4", "#hour-5"];
+  var hourIds = ["#hour-9", "#hour-10", "#hour-11", "#hour-12", "#hour-13", "#hour-14", "#hour-15", "#hour-16", "#hour-17"];
   var hourOfDay = dayjs().get('hour');
   console.log(hourOfDay);
+
   for(i = 0; i < hourIds.length; i++){
+    var changeToPast = document.querySelector(hourIds[i]);
+
+    if(hourOfDay == hourIds[i].split("-")[1]){
+      if(changeToPast.classList.contains('future')){
+        changeToPast.classList.remove('future');
+        changeToPast.classList.add('present');
+        console.log(true)
+      }
+    }
+    
     if(hourOfDay > hourIds[i].split("-")[1]){
-      var changeToPast = document.querySelector(hourIds[i]);
+      
       if (changeToPast.classList.contains('present')){
         changeToPast.classList.remove('present');
         changeToPast.classList.add('past');
