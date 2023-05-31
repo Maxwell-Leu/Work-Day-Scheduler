@@ -13,12 +13,13 @@ $(function () {
   
   function saveEvent(event){
     event.preventDefault();
+    var key = $(this).parent().attr('id')
     var eventInfo = {
         eventId: $(this).parent().attr('id'),
         eventDescription: document.querySelector('.description').value
     }
     console.log()
-    localStorage.setItem("eventInfo", JSON.stringify(eventInfo));
+    localStorage.setItem(key, JSON.stringify(eventInfo));
   }
 
   saveButton.on('click', saveEvent);
@@ -56,7 +57,12 @@ $(function () {
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  
+  for(i = 0; i < localStorage.length; i++){
+    var eventInfo = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    var id = "#"+eventInfo.eventId
+    $(id).children(".description").text(eventInfo.eventDescription);
+    console.log(id)
+  }
 
 
   // TODO: Add code to display the current date in the header of the page.
